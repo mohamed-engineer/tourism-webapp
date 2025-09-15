@@ -1,6 +1,6 @@
 // components/Footer.tsx
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-
+import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 px-6 md:px-16 text-right">
@@ -12,10 +12,10 @@ export default function Footer() {
         <div>
           <h3 className="text-white text-xl font-bold mb-4">روابط سريعة</h3>
           <ul className="space-y-2">
-            <li><a href="/" className="hover:text-white">الرئيسية</a></li>
-            <li><a href="/tours" className="hover:text-white">العروض</a></li>
-            <li><a href="/services" className="hover:text-white">الخدمات</a></li>
-            <li><a href="/contact" className="hover:text-white">تواصل معنا</a></li>
+            <li><Link href="/" className="hover:text-white">الرئيسية</Link></li>
+            <li><Link href="/tours" className="hover:text-white">العروض</Link></li>
+            <li><Link href="/services" className="hover:text-white">الخدمات</Link></li>
+            <li><Link href="/contact" className="hover:text-white">تواصل معنا</Link></li>
           </ul>
         </div>
         <div>
