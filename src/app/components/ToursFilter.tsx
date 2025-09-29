@@ -1,26 +1,34 @@
-// components/ToursFilter.tsx
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const destinations = ["باريس", "دبي", "المالديف", "تركيا", "تايلاند"];
 const durations = ["3 أيام", "5 أيام", "7 أيام", "10 أيام+"];
 const budgets = ["أقل من 500$", "500$ - 1000$", "1000$ - 2000$", "أكثر من 2000$"];
 
-const sampleTours = [
+type Tour = {
+  id: number;
+  title: string;
+  destination: string;
+  duration: string;
+  budget: string;
+  img: string;
+};
+
+const sampleTours: Tour[] = [
   { id: 1, title: "رحلة الأحلام إلى باريس", destination: "باريس", duration: "5 أيام", budget: "1000$ - 2000$", img: "/paris.avif" },
   { id: 2, title: "استجمام فاخر في المالديف", destination: "المالديف", duration: "7 أيام", budget: "أكثر من 2000$", img: "/maldives.jpeg" },
   { id: 3, title: "مغامرة رائعة في دبي", destination: "دبي", duration: "3 أيام", budget: "500$ - 1000$", img: "/dubai.jpg" },
   { id: 4, title: "جولة ثقافية في تركيا", destination: "تركيا", duration: "10 أيام+", budget: "1000$ - 2000$", img: "/turkey.jpg" },
   { id: 5, title: "استكشاف جمال تايلاند", destination: "تايلاند", duration: "7 أيام", budget: "500$ - 1000$", img: "/tailand.jpg" },
-
 ];
 
 export default function ToursFilter() {
   const [selectedDestination, setSelectedDestination] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
   const [selectedBudget, setSelectedBudget] = useState("");
-  const [filteredTours, setFilteredTours] = useState<any[]>([]);
+  const [filteredTours, setFilteredTours] = useState<Tour[]>([]); // 👈 هنا بدلنا any بـ Tour
 
   const handleFilter = () => {
     const results = sampleTours.filter((tour) => {
@@ -38,6 +46,7 @@ export default function ToursFilter() {
       <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10">
         ابحث عن رحلتك المثالية
       </h2>
+
       {/* الفلتر */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-8">
         <select
@@ -55,7 +64,7 @@ export default function ToursFilter() {
           onChange={(e) => setSelectedDuration(e.target.value)}
           className="border text-black rounded-lg p-3"
         >
-          <option className="" value="">المدة</option>
+          <option value="">المدة</option>
           {durations.map((d) => (
             <option key={d} value={d}>{d}</option>
           ))}
@@ -96,7 +105,7 @@ export default function ToursFilter() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4 }}
               >
-                <img src={tour.img} alt={tour.title} className="w-full h-48 object-cover" />
+                <Image src={tour.img} alt={tour.title} width={400} height={200} className="w-full h-48 object-cover" />
                 <div className="p-4 text-right">
                   <h3 className="text-lg font-semibold text-gray-800">{tour.title}</h3>
                   <p className="text-gray-500 text-sm">{tour.destination} • {tour.duration}</p>
